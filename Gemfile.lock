@@ -1,0 +1,27 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    childprocess (3.0.0)
+    nokogiri (1.12.4-x86_64-darwin)
+      racc (~> 1.4)
+    racc (1.5.2)
+    rack (2.2.3)
+    regexp_parser (2.1.1)
+    rubyzip (2.3.2)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
+    watir (6.19.1)
+      regexp_parser (>= 1.2, < 3)
+      selenium-webdriver (>= 3.142.7)
+
+PLATFORMS
+  x86_64-darwin-19
+
+DEPENDENCIES
+  nokogiri
+  rack
+  watir
+
+BUNDLED WITH
+   2.2.28
