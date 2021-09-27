@@ -8,4 +8,6 @@ require 'watir'
 require_relative '../lib/compare_supermarkets/scraper'
 require_relative '../lib/compare_supermarkets/product'
 require_relative '../lib/compare_supermarkets/cli'
+require_relative '../lib/compare_supermarkets/version'
 
+Watir.default_timeout = 0

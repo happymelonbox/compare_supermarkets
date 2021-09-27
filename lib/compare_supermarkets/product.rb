@@ -15,7 +15,7 @@ class CompareSupermarkets::Product
         @cent_value = cent_value
         @url = @supermarket == "Coles" ? "https://shop.coles.com.au#{url}" : "https://www.woolworths.com.au#{url}"
         @@all << self
-        if supermarket == "coles"
+        if @supermarket == "Coles"
             @@coles_all << self
         else
             @@woolworths_all << self
@@ -26,12 +26,12 @@ class CompareSupermarkets::Product
         @all
     end
 
-    def self.all_count
+    def self.count
         @@all.count
     end
-    
+
     def self.coles_new_from_search(product)
-        product_to_compare = self.new("Coles", 
+        product_to_compare = self.new("Coles",
             product.css(".product-name").text,
             product.css(".package-price").text.delete_prefix('$').gsub('per', '/'),
             product.css(".package-size.accessibility-inline").text,
@@ -41,7 +41,7 @@ class CompareSupermarkets::Product
     end
 
     def self.woolworths_new_from_search(product)
-        product_to_compare = self.new("Woolworths", 
+        product_to_compare = self.new("Woolworths",
             product.css(".shelfProductTile-descriptionLink").text,
             product.css(".shelfProductTile-cupPrice.ng-star-inserted").text.delete_prefix(' $').chomp(" "),
             product.css(".shelfProductTile-descriptionLink").text.split(" ").last,
@@ -51,7 +51,10 @@ class CompareSupermarkets::Product
     end
 
     def self.all_items_sorted_by_price
-        sorted = @@all.sort_by!{|s| s.price.to_f}
+        sorted = @@all.sort_by! do |s|
+            price_to_sort = s.dollar_value + '.' + s.cent_value
+            price_to_sort.to_f
+        end
     end
 
     def self.all_top_10_sorted_by_price
@@ -59,11 +62,17 @@ class CompareSupermarkets::Product
     end
 
     def self.coles_sorted_by_price
-        @@coles_all.sort_by!{|s| s.price.to_f}
+        @@coles_all.sort_by! do |s|
+        price_to_sort = s.dollar_value + '.' + s.cent_value
+        price_to_sort.to_f
+        end
     end
 
     def self.woolworths_sorted_by_price
-        @@woolworths_all.sort_by!{|s| s.price.to_f}
+        @@woolworths_all.sort_by! do |s|
+            price_to_sort = s.dollar_value + '.' + s.cent_value
+            price_to_sort.to_f
+        end
     end
 
     def self.clear_all
