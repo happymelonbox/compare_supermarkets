@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "compare_supermarkets"
   spec.version       = CompareSupermarkets::VERSION
   spec.authors       = ["Justin Berger Howes"]
-  spec.email         = ["howes.j.j@gmail.com"]
+  spec.email         = ["happymelonbox@gmail.com"]
   spec.platform = Gem::Platform::RUBY
   spec.summary       = "Compare supermarket prices"
   spec.description   =
