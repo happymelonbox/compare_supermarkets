@@ -200,6 +200,7 @@ class CompareSupermarkets::CLI
             how_to_display
         elsif input == "2"
             CompareSupermarkets::Product.clear_all
+            CompareSupermarkets::Supermarket.clear_all
             start
         elsif input == ""
             invalid_input
@@ -263,7 +264,7 @@ class CompareSupermarkets::CLI
     def print_items(choice, direction)
         direction == "asc" ? choice = choice : choice = choice.reverse
         choice.each do |item|
-            p "Supermarket: #{item.supermarket}"
+            p "Supermarket: #{item.supermarket.name}"
             p "Item name: #{item.name}"
             p "Item price: $#{item.dollar_value}.#{item.cent_value}"
             p "Item unit size: #{item.unit_size}"

@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.version       = CompareSupermarkets::VERSION
   spec.authors       = ["Justin Berger Howes"]
   spec.email         = ["happymelonbox@gmail.com"]
-  spec.platform = Gem::Platform::RUBY
+  spec.platform      = Gem::Platform::RUBY
   spec.summary       = "Compare supermarket prices"
-  spec.description   = "Will search Woolworths and Coles online stores for prices based on an input search parameter"
+  spec.description   = "Will search Woolworths and Coles online stores for prices based on an input search parameter **Google Chrome Required**"
   spec.homepage      = "http://rubygems.org/gems/compare_supermarkets"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
@@ -30,5 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "nokogiri", ">= 1.10.8"
   spec.add_development_dependency "pry", ">= 0"
   spec.add_development_dependency "watir", "~> 6.19.1"
+  spec.add_development_dependency "selenium-webdriver", "~> 3.142.7"
 
 end

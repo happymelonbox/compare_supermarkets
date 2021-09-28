@@ -27,7 +27,8 @@ class CompareSupermarkets::Scraper
             all_coles_products = coles_products.css(".product")
             all_coles_products.each do |product|
                 if product.css(".product-name").text != ""
-                    CompareSupermarkets::Product.coles_new_from_search(product)
+                    coles = CompareSupermarkets::Supermarket.new("Coles")
+                    coles.add_product(product)
                 end
             end
         ensure
@@ -48,7 +49,8 @@ class CompareSupermarkets::Scraper
             woolworths_all_products.each do |product|
                 if product.css(".shelfProductTile-descriptionLink").text != ""
                     if product.css(".unavailableSection.width-full.ng-star-inserted").empty?
-                        CompareSupermarkets::Product.woolworths_new_from_search(product)
+                        woolworths = CompareSupermarkets::Supermarket.new("Woolworths")
+                        woolworths.add_product(product)
                     end
                 end
             end
