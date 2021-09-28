@@ -4,3 +4,5 @@ set -euo pipefail
 IFS=$'\n\t'
 
 bundle install
+gem install selenium-webdriver #required for watir to work
+brew install --cask chromedriver #required for watir to work

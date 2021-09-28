@@ -18,9 +18,11 @@ Or install it yourself as:
 
     $ gem install compare_supermarkets
 
+**Google chrome must be installed to use this GEM**
+
 ## Usage
 
-To use compare_supermarkets call $ 'compare_supermarkets' and follow the prompts. 
+To use compare_supermarkets call $ compare_supermarkets and follow the prompts. 
 The more specific you are the faster the search results appear
 and there will be less items to compare.
 
