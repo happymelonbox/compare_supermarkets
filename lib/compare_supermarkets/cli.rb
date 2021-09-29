@@ -42,7 +42,7 @@ class CompareSupermarkets::CLI
         self.search_supermarkets(input)
         puts ""
         puts ""
-        if CompareSupermarkets::Product.count > 10
+        if CompareSupermarkets::Product.count > 20
             puts ""
             puts "Ooo, jeez, seems like we have a lot of results."
             puts "We have #{CompareSupermarkets::Product.count} results for you."

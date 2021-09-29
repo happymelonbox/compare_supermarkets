@@ -11,6 +11,8 @@
 ## [0.3.0] - 2021-09-30
 
 - Added IGA as a supermarket
+- Edited IGA search functionality to account for "close match" results.
+- Changed the "lots of results" to 20 instead of 10
 - Updated CLI to include IGA
 
 

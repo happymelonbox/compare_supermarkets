@@ -9,7 +9,7 @@ class CompareSupermarkets::Supermarket
         @products = []
     end
 
-    def add_product(product, search_term = "")
+    def add_product(product)
         if self.name == "Coles"
             new_product = CompareSupermarkets::Product.new(self,
                 product.css(".product-name").text,
@@ -33,15 +33,14 @@ class CompareSupermarkets::Supermarket
                         ".ProductCardPrice-sc-zgh1l1.jYaBFk"
                     end
             new_product = CompareSupermarkets::Product.new(self,
-                product.css(".ProductCardTitle-sc-ye20s3.IDyAF").text.split(', ').first,
+                product.css(".sc-hKFyIo.bdDYJz").text.split(', ').first,
                 product.css(".ProductCardPriceInfo-sc-1o21dmb.iDDqhD").text.delete_prefix("$").gsub("/", " / "),
-                product.css(".ProductCardTitle-sc-ye20s3.IDyAF").text.split(', ').last,
+                product.css(".sc-hKFyIo.bdDYJz").text.split(', ').last,
                 product.css(".ProductCardHiddenLink-sc-y1ynto.hGUSDV").attribute('href').value,
                 product.css(price_css).text.delete_prefix("$").split(".").first,
                 product.css(price_css).text.split(".").last.chomp(" avg/ea")
             )
         end
-        p new_product
         @products << new_product
     end
 

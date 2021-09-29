@@ -78,8 +78,8 @@ class CompareSupermarkets::Scraper
             iga_all_products = iga_products.css(".ColListing-sc-lcurnl.kYBrWq")
             iga = CompareSupermarkets::Supermarket.new("IGA")
             iga_all_products.each do |product|
-                if product.css(".ProductCardTitle-sc-ye20s3.IDyAF").text != "" && product.css(".ProductCardTitle-sc-ye20s3.IDyAF").text.include?(search_term)
-                    iga.add_product(product, search_term)
+                if product.css(".sc-hKFyIo.bdDYJz").text.downcase[search_term]
+                    iga.add_product(product)
                 end
             end
             if iga.products.count == 0
