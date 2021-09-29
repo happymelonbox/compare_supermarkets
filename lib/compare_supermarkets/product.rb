@@ -10,7 +10,13 @@ class CompareSupermarkets::Product
         @unit_size = unit_size
         @dollar_value = dollar_value
         @cent_value = cent_value
-        @url = @supermarket.name == "Coles" ? "https://shop.coles.com.au#{url}" : "https://www.woolworths.com.au#{url}"
+        @url = if @supermarket.name == "Coles" 
+                    "https://shop.coles.com.au#{url}"
+                elsif @supermarket.name == "Woolworths" 
+                    "https://www.woolworths.com.au#{url}"
+                else
+                    url
+                end
         @@all << self
     end
 
@@ -49,6 +55,14 @@ class CompareSupermarkets::Product
     def self.woolworths_sorted_by_price
         woolworths_items = self.all.select{|product| product.supermarket_name == "Woolworths"}
         woolworths_items.sort_by! do |s|
+            price_to_sort = s.dollar_value + '.' + s.cent_value
+            price_to_sort.to_f
+        end
+    end
+
+    def self.iga_sorted_by_price
+        iga_items = self.all.select{|product| product.supermarket_name == "IGA"}
+        iga_items.sort_by! do |s|
             price_to_sort = s.dollar_value + '.' + s.cent_value
             price_to_sort.to_f
         end

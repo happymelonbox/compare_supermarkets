@@ -111,6 +111,8 @@ class CompareSupermarkets::CLI
         puts ""
         puts "5 - Only Woolworths items"
         puts ""
+        puts "6 - Only IGA items"
+        puts ""
         input = gets.strip
         puts ""
         choice(input)
@@ -134,6 +136,10 @@ class CompareSupermarkets::CLI
         elsif input == "5"
             how_to_sort ? direction = "asc" : direction = "desc"
             choice = CompareSupermarkets::Product.woolworths_sorted_by_price
+            print_items(choice, direction)
+        elsif input == "6"
+            how_to_sort ? direction = "asc" : direction = "desc"
+            choice = CompareSupermarkets::Product.iga_sorted_by_price
             print_items(choice, direction)
         elsif input == ""
             invalid_input
