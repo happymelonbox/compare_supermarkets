@@ -5,7 +5,7 @@ class CompareSupermarkets::CLI
         puts ""
         puts "Type q at any time to exit."
         puts ""
-        puts "Would you like to compare prices between Coles and Woolies? (Y/N)"
+        puts "Would you like to compare prices between Coles, Woolworths and IGA? (Y/N)"
         input = gets.strip.downcase
         puts ""
         if input == "y"

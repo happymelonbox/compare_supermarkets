@@ -1,5 +1,5 @@
-Ever wondered 'I wonder if my shampoo is cheaper at Coles or Woolworths...?' ? But can't be
-bothered searching both websites and comparing? Well that's what this gem does for you. Simply
+Ever wondered 'I wonder if my shampoo is cheaper at Coles, Woolworths or IGA...?' ? But can't be
+bothered searching all three websites and comparing? Well that's what this gem does for you. Simply
 install and follow the prompts.
 
 ## Installation
@@ -18,7 +18,7 @@ Or install it yourself as:
 
     $ gem install compare_supermarkets
 
-**Google chrome must be installed to use this GEM**
+**Google chrome and Chrome Drivers must be installed to use this GEM**
 
 ## Usage
 

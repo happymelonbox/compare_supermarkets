@@ -8,4 +8,9 @@
 
 - Refactored code to include the supermarket class
 
+## [0.3.0] - 2021-09-30
+
+- Added IGA as a supermarket
+- Updated CLI to include IGA
+
 
