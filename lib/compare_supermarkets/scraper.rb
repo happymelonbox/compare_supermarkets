@@ -7,86 +7,80 @@ class CompareSupermarkets::Scraper
     end
 
     def self.search_supermarkets(search_term)
-        self.search_coles_for(search_term)
-        self.search_woolworths_for(search_term)
-        self.search_iga_for(search_term)
+        supermarkets = ["Coles", "Woolworths", "IGA"]
+        supermarkets.each do |supermarket|
+            search_for(supermarket, search_term)
+        end
     end
 
-    def self.search_coles_for(search_term)
+    def self.search_for(supermarket, search_term)
+        open_browser(supermarket, search_term)
+    end
+
+    def self.open_browser(supermarket, search_term)
         browser = Watir::Browser.new :chrome
-        browser.goto("https://shop.coles.com.au/a/national/everything/search/#{search_term}")
+        if supermarket.downcase == "coles"
+            search = "https://shop.coles.com.au/a/national/everything/search/#{search_term}"
+            class_name = "products"
+        elsif supermarket.downcase == "woolworths"
+            search = "https://www.woolworths.com.au/shop/search/products?searchTerm=#{search_term}"
+            class_name = "layoutWrapper"
+        else
+            search = "https://new.igashop.com.au/sm/pickup/rsid/53363/results?q=#{search_term}"
+            class_name = ["Listing-sc-1vfhaq2", "iQljRa"]
+        end
+        browser.goto(search)
+        self.handle_waiting(browser, supermarket, class_name, search_term)
+    end
+
+    def self.handle_waiting(browser, supermarket, class_name, search_term)
         begin
-            coles_js_doc = browser.element(class: "products").wait_until(&:present?)
+            js_doc = browser.element(class: class_name).wait_until(&:present?)
         rescue
-            puts "Coles does not have this product"
+            puts "#{supermarket} does not have any #{search_term}"
             puts ""
-            puts "Let's check Woolworths"
             puts ""
+            if supermarket.downcase != "iga"
+                puts "Let's check the next one"
+            end
             puts ""
         else
-            coles_products = Nokogiri::HTML(coles_js_doc.inner_html)
-            all_coles_products = coles_products.css(".product")
-            coles = CompareSupermarkets::Supermarket.new("Coles")
-            all_coles_products.each do |product|
-                if product.css(".product-name").text != ""
-                    coles.add_product(product)
-                end
-            end
-            if coles.products.count == 0
-                puts "Coles do not have this product"
-            end
+            products = Nokogiri::HTML(js_doc.inner_html)
+            self.add_supermarket_products(supermarket, products, search_term)
         ensure
             browser.close
         end
     end
 
-    def self.search_woolworths_for(search_term)
-        browser = Watir::Browser.new :chrome
-        browser.goto("https://www.woolworths.com.au/shop/search/products?searchTerm=#{search_term}")
-        begin
-            woolworths_js_doc = browser.element(class: "layoutWrapper").wait_until(&:present?)
-        rescue
-            puts "Woolworths does not have this product"
-        else
-            woolworths_products = Nokogiri::HTML(woolworths_js_doc.inner_html)
-            woolworths_all_products = woolworths_products.css(".shelfProductTile-content")
-            woolworths = CompareSupermarkets::Supermarket.new("Woolworths")
-            woolworths_all_products.each do |product|
-                if product.css(".shelfProductTile-descriptionLink").text != ""
-                    if product.css(".unavailableSection.width-full.ng-star-inserted").empty?
-                        woolworths.add_product(product)
-                    end
-                end
+    def self.add_supermarket_products(supermarket, products, search_term)
+        new_supermarket = CompareSupermarkets::Supermarket.new(supermarket)
+        self.which_supermarket(supermarket, products).each do |product|
+            if check?(supermarket, product, search_term)
+                new_supermarket.add_product(product)
             end
-            if woolworths.products.count == 0
-                puts "Woolworths do not have this product"
-            end
-        ensure
-            browser.close
+        end
+        if new_supermarket.products.count == 0
+            puts "#{supermarket} do not have any #{search_term}"
         end
     end
 
-    def self.search_iga_for(search_term)
-        browser = Watir::Browser.new :chrome
-        browser.goto("https://new.igashop.com.au/sm/pickup/rsid/53363/results?q=#{search_term}")
-        begin
-            iga_js_doc = browser.element(class: ["Listing-sc-1vfhaq2", "iQljRa"]).wait_until(&:present?)
-        rescue
-            puts "iga does not have this product"
+    def self.check?(supermarket, product, search_term)
+        if supermarket.downcase == "coles"
+            check = product.css(".product-name").text != ""
+        elsif supermarket.downcase == "woolworths"
+            check = product.css(".shelfProductTile-descriptionLink").text != ""
         else
-            iga_products = Nokogiri::HTML(iga_js_doc.inner_html)
-            iga_all_products = iga_products.css(".ColListing-sc-lcurnl.kYBrWq")
-            iga = CompareSupermarkets::Supermarket.new("IGA")
-            iga_all_products.each do |product|
-                if product.css(".sc-hKFyIo.bdDYJz").text.downcase[search_term]
-                    iga.add_product(product)
-                end
-            end
-            if iga.products.count == 0
-                puts "IGA do not have this product"
-            end
-        ensure
-            browser.close
+            check = product.css(".sc-hKFyIo.bdDYJz").text.downcase[search_term]
+        end
+    end
+
+    def self.which_supermarket(supermarket, products)
+        if supermarket.downcase == "coles"
+            all_products = products.css(".product")
+        elsif supermarket.downcase == "woolworths"
+            all_products = products.css(".shelfProductTile-content")
+        else
+            all_products = products.css(".ColListing-sc-lcurnl.kYBrWq")
         end
     end
 end

@@ -52,8 +52,8 @@ class CompareSupermarkets::CLI
             change_search_term
         elsif CompareSupermarkets::Product.count == 0
             puts ""
-            puts "Ohhh man! Doesn't seem like either supermarket carry"
-            puts "that product."
+            puts "Ohhh man! Doesn't seem like any of these supermarkets"
+            puts "carry that product."
             puts ""
             change_search_term
         else

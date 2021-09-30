@@ -9,6 +9,10 @@ class CompareSupermarkets::Supermarket
         @products = []
     end
 
+    def self.all
+        @@all
+    end
+
     def add_product(product)
         if self.name == "Coles"
             new_product = CompareSupermarkets::Product.new(self,
