@@ -15,4 +15,8 @@
 - Changed the "lots of results" to 20 instead of 10
 - Updated CLI to include IGA
 
+## [0.3.1] - 2021-10-01
+
+- Refactored to reduce repetition
+
 
