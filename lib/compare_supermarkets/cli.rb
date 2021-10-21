@@ -5,7 +5,7 @@ class CompareSupermarkets::CLI
         puts ""
         puts "Type q at any time to exit."
         puts ""
-        puts "Would you like to compare prices between Coles, Woolworths and IGA? (Y/N)"
+        puts "Would you like to compare prices between Coles and Woolworths (Y/N)"
         input = gets.strip.downcase
         puts ""
         if input == "y"
@@ -48,6 +48,8 @@ class CompareSupermarkets::CLI
             puts "We have #{CompareSupermarkets::Product.count} results for you."
             puts "If you were a little more specific with your search"
             puts "term, we would have less to sort through..."
+            puts ""
+            puts "If you still want to see all of these results, select N"
             puts ""
             change_search_term
         elsif CompareSupermarkets::Product.count == 0
@@ -111,8 +113,6 @@ class CompareSupermarkets::CLI
         puts ""
         puts "5 - Only Woolworths items"
         puts ""
-        puts "6 - Only IGA items"
-        puts ""
         input = gets.strip
         puts ""
         choice(input)
@@ -136,10 +136,6 @@ class CompareSupermarkets::CLI
         elsif input == "5"
             how_to_sort ? direction = "asc" : direction = "desc"
             choice = CompareSupermarkets::Product.woolworths_sorted_by_price
-            print_items(choice, direction)
-        elsif input == "6"
-            how_to_sort ? direction = "asc" : direction = "desc"
-            choice = CompareSupermarkets::Product.iga_sorted_by_price
             print_items(choice, direction)
         elsif input == ""
             invalid_input

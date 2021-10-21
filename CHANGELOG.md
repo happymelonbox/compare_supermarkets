@@ -19,4 +19,12 @@
 
 - Refactored to reduce repetition
 
+## [0.4.1] - 2021-10-21
+
+- Removed gem artifacts and added .gitignore. 
+- Updated README.md to give direction for chrome driver installation. #todo
+- Removed IGA as comparison due to the ever changing nature of the websites code. #todo
+- Refactored the scaper class to include subclasses to remove repetition. #todo
+- Refactored the supermarket class to include subclasses to remove repetition. #todo
+
 

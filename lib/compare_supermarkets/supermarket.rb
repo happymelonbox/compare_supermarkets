@@ -22,7 +22,7 @@ class CompareSupermarkets::Supermarket
                 product.css(".product-image-link").attribute('href'),
                 product.css(".dollar-value").text,
                 product.css(".cent-value").text.delete_prefix('.'))
-        elsif self.name == "Woolworths"
+        else
             new_product = CompareSupermarkets::Product.new(self,
                 product.css(".shelfProductTile-descriptionLink").text,
                 product.css(".shelfProductTile-cupPrice.ng-star-inserted").text.delete_prefix(' $').chomp(" "),
@@ -30,20 +30,6 @@ class CompareSupermarkets::Supermarket
                 product.css(".shelfProductTile-descriptionLink").attribute('href').value,
                 product.css(".price-dollars").text,
                 product.css(".price-cents").text)
-        else
-            price_css = if product.css(".ProductCardPrice-sc-zgh1l1.hwVjs").text.delete_prefix("$").split(".").first
-                        ".ProductCardPrice-sc-zgh1l1.hwVjs" 
-                    else
-                        ".ProductCardPrice-sc-zgh1l1.jYaBFk"
-                    end
-            new_product = CompareSupermarkets::Product.new(self,
-                product.css(".sc-hKFyIo.bdDYJz").text.split(', ').first,
-                product.css(".ProductCardPriceInfo-sc-1o21dmb.iDDqhD").text.delete_prefix("$").gsub("/", " / "),
-                product.css(".sc-hKFyIo.bdDYJz").text.split(', ').last,
-                product.css(".ProductCardHiddenLink-sc-y1ynto.hGUSDV").attribute('href').value,
-                product.css(price_css).text.delete_prefix("$").split(".").first,
-                product.css(price_css).text.split(".").last.chomp(" avg/ea")
-            )
         end
         @products << new_product
     end
