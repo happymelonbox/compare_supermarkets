@@ -18,7 +18,15 @@ Or install it yourself as:
 
     $ gem install compare_supermarkets
 
-**Google chrome and Chrome Drivers must be installed to use this GEM**
+**Google chrome and ChromeDriver must be installed to use this GEM**
+
+To install ChromeDriver on MacOS
+
+    $ brew install --cask chromedriver
+
+To install ChromeDriver on Windows please visit this guide and follow along
+    https://chromedriver.chromium.org/getting-started
+
 
 ## Usage
 

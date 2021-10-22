@@ -4,4 +4,3 @@ set -euo pipefail
 IFS=$'\n\t'
 
 bundle install
-brew install --cask chromedriver #required for watir to work

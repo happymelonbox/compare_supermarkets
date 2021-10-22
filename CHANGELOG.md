@@ -26,5 +26,6 @@
 - Removed IGA as comparison due to the ever changing nature of the websites code.
 - Refactored the scaper class to include subclasses.
 - Refactored the supermarket class to include subclasses.
+- Adjusted dependencies
 
 
