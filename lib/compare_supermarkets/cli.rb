@@ -60,7 +60,7 @@ class CompareSupermarkets::CLI
             change_search_term
         else
             puts ""
-            puts "Great! We have #{CompareSupermarkets::Product.count} items for you."
+            puts "Great! We have #{CompareSupermarkets::Product.count} items in stock for you."
             puts ""
             puts ""
             puts ""
