@@ -1,6 +1,8 @@
-Ever wondered 'I wonder if my shampoo is cheaper at Coles, Woolworths or IGA...?' ? But can't be
+Ever wondered 'I wonder if my shampoo is cheaper at Coles or Woolworths...?' ? But can't be
 bothered searching all three websites and comparing? Well that's what this gem does for you. Simply
 install and follow the prompts.
+
+**For those who previously downloaded this Gem, compare_supermarkets no longer compares IGA prices as the IGA HTML changes too frequently - Apologies for the inconvenience.**
 
 ## Installation
 
