@@ -69,7 +69,8 @@ class CompareSupermarkets::CLI
     end
 
     def search_supermarkets(input)
-        CompareSupermarkets::Scraper.search_supermarkets(input)
+        supermarkets = ["Coles", "Woolworths"]
+        CompareSupermarkets::Scraper.search_supermarkets(supermarkets, input)
     end
 
     def change_search_term

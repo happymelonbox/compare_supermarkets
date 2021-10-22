@@ -6,9 +6,10 @@ class CompareSupermarkets::Scraper
         @search_term = search_term
     end
 
-    def self.search_supermarkets(search_term)
-        CompareSupermarkets::ColesScraper.search_browser(search_term)
-        CompareSupermarkets::WoolworthsScraper.search_browser(search_term)
+    def self.search_supermarkets(supermarkets, search_term)
+        supermarkets.each do |supermarket|
+        Kernel.const_get("CompareSupermarkets::#{supermarket}Scraper").search_browser(search_term)
+        end
     end
 
     def self.handle_waiting(supermarket, class_name, all_products, search, check)
@@ -20,7 +21,7 @@ class CompareSupermarkets::Scraper
             puts "This product cannot be found"
             puts ""
         else
-            new_supermarket = CompareSupermarkets::Supermarket.new(supermarket)
+            new_supermarket = Kernel.const_get("CompareSupermarkets::#{supermarket}").new(supermarket)
             products = Nokogiri::HTML(js_doc.inner_html)
             products.css(all_products).each do |product|
                 if product.css(check).text != ""
@@ -55,7 +56,7 @@ class CompareSupermarkets::WoolworthsScraper < CompareSupermarkets::Scraper
         all_products = ".shelfProductTile-content"
         class_name = "layoutWrapper"
         check = ".shelfProductTile-descriptionLink"
-        self.handle_waiting('Coolworths', class_name, all_products, search, search_term)
+        self.handle_waiting('Woolworths', class_name, all_products, search, check)
     end
 
 end
