@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["happymelonbox@gmail.com"]
   spec.platform      = Gem::Platform::RUBY
   spec.summary       = "Compare supermarket prices"
-  spec.description   = "Will search Woolworths, Coles and IGA online stores for prices based on an input search parameter **Google Chrome Required**"
+  spec.description   = "Will search Woolworths and Coles online stores for prices based on an input search parameter **Google Chrome Required**"
   spec.homepage      = "http://rubygems.org/gems/compare_supermarkets"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
