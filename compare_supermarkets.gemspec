@@ -27,9 +27,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.2.28"
   spec.add_development_dependency "rake", "~> 13.0.6"
   spec.add_development_dependency "rspec", "~> 3.10.0"
-  spec.add_development_dependency "nokogiri", ">= 1.10.8"
   spec.add_development_dependency "pry", ">= 0"
-  spec.add_development_dependency "watir", "~> 6.19.1"
-  spec.add_development_dependency "selenium-webdriver", "~> 3.142.7"
+  spec.add_dependency "nokogiri", ">= 1.10.8"
+  spec.add_dependency "watir", "~> 6.19.1"
+  spec.add_dependency "selenium-webdriver", "~> 3.142.7"
 
 end
