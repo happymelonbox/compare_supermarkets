@@ -1,7 +1,11 @@
 PATH
   remote: .
   specs:
-    compare_supermarkets (0.3.1)
+    compare_supermarkets (0.4.1)
+      nokogiri (>= 1.10.8)
+      pry
+      selenium-webdriver (~> 3.142.7)
+      watir (~> 6.19.1)
 
 GEM
   remote: https://rubygems.org/

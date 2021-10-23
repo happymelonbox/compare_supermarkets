@@ -8,14 +8,15 @@ class CompareSupermarkets::Scraper
 
     def self.search_supermarkets(supermarkets, search_term)
         supermarkets.each do |supermarket|
-        Kernel.const_get("CompareSupermarkets::#{supermarket}Scraper").search_browser(search_term)
+            new_supermarket = Kernel.const_get("CompareSupermarkets::#{supermarket}Scraper").new(search_term)
+            new_supermarket.search_browser
         end
     end
 
-    def self.handle_waiting(supermarket, class_name, all_products, search, check)
+    def handle_waiting(supermarket, class_name, all_products, search, search_term, check)
         browser = Watir::Browser.new :chrome
         begin
-            browser.goto(search)
+            browser.goto(search+search_term)
             js_doc = browser.element(class: class_name).wait_until(&:present?)
         rescue
             puts "This product cannot be found"
@@ -35,28 +36,34 @@ class CompareSupermarkets::Scraper
             browser.close
         end
     end
+
+    def search_browser
+        handle_waiting(@supermarket, @class_name, @all_products, @search, @search_term, @check)
+    end
 end
 
 class CompareSupermarkets::ColesScraper < CompareSupermarkets::Scraper
 
-    def self.search_browser(search_term)
-        search = "https://shop.coles.com.au/a/national/everything/search/#{search_term}"
-        class_name = "products"
-        all_products = ".product"
-        check = ".product-name"
-        self.handle_waiting('Coles', class_name, all_products, search, check)
+    def initialize(search_term)
+        @supermarket = 'Coles'
+        @search = "https://shop.coles.com.au/a/national/everything/search/"
+        @search_term = search_term
+        @class_name = "products"
+        @all_products = ".product"
+        @check = ".product-name"
     end
 
 end
 
 class CompareSupermarkets::WoolworthsScraper < CompareSupermarkets::Scraper
 
-    def self.search_browser(search_term)
-        search = "https://www.woolworths.com.au/shop/search/products?searchTerm=#{search_term}"
-        all_products = ".shelfProductTile-content"
-        class_name = "layoutWrapper"
-        check = ".shelfProductTile-descriptionLink"
-        self.handle_waiting('Woolworths', class_name, all_products, search, check)
+    def initialize(search_term)
+        @supermarket = 'Woolworths'
+        @search = "https://www.woolworths.com.au/shop/search/products?searchTerm="
+        @search_term = search_term
+        @class_name = "layoutWrapper"
+        @all_products = ".shelfProductTile-content"
+        @check = ".shelfProductTile-descriptionLink"
     end
 
 end

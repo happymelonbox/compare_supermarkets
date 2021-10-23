@@ -1,7 +1,7 @@
 class CompareSupermarkets::CLI
     def call
         puts ""
-        puts "Welcome to The Supermarket Comparer"
+        puts "Welcome to Compare_Supermarkets"
         puts ""
         puts "Type q at any time to exit."
         puts ""
@@ -29,7 +29,7 @@ class CompareSupermarkets::CLI
     def start
         puts ""
         puts "Great!"
-        puts "Please enter the name of the item you wish to compare"
+        puts "Please enter the name of the item you wish to compare (example: red tractor oats or purple sweet potato)"
         input = gets.strip.downcase
         puts ""
         puts ""
@@ -151,7 +151,7 @@ class CompareSupermarkets::CLI
 
     def finished
         puts ""
-        puts "Is this what you were looking for?(Y/N)"
+        puts "Is this what you were looking for? (Y/N)"
         input = gets.strip.downcase
         if input == "y"
             puts ""
@@ -240,6 +240,7 @@ class CompareSupermarkets::CLI
     def how_to_sort
         puts ""
         puts "How would you like your results sorted?"
+        puts ""
         puts "1 - Cheapest to most expensive"
         puts "2 - Most expensive to cheapest"
         puts ""
