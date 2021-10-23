@@ -22,14 +22,14 @@ class CompareSupermarkets::Scraper
             puts "This product cannot be found"
             puts ""
         else
-            new_supermarket = Kernel.const_get("CompareSupermarkets::#{supermarket}").new(supermarket)
             products = Nokogiri::HTML(js_doc.inner_html)
             products.css(all_products).each do |product|
                 if product.css(check).text != ""
-                    new_supermarket.add_product(product)
+                    new_supermarket = Kernel.const_get("CompareSupermarkets::#{supermarket}").new(product)
+                    new_supermarket.add_product
                 end
             end
-            if new_supermarket.products.count == 0
+            if Kernel.const_get("CompareSupermarkets::#{supermarket}").all_products.count == 0
                 puts "#{supermarket} do not have this item"
             end
         ensure

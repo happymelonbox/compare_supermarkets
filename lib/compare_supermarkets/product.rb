@@ -10,13 +10,7 @@ class CompareSupermarkets::Product
         @unit_size = unit_size
         @dollar_value = dollar_value
         @cent_value = cent_value
-        @url = if @supermarket.name == "Coles" 
-                    "https://shop.coles.com.au#{url}"
-                elsif @supermarket.name == "Woolworths" 
-                    "https://www.woolworths.com.au#{url}"
-                else
-                    url
-                end
+        @url = url
         @@all << self
     end
 
